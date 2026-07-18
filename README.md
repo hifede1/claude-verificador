@@ -1,4 +1,4 @@
 # claude-verificador
 
-> ⚪ En diseño — la ficha vive en `../fichas/verificador.md` y aún no está firmada.
-> No construir hasta que la ficha pase a 🔵 y viaje acá como `docs/FICHA.md`.
+> 🔵 Lista para construir — el contrato firmado está en `docs/FICHA.md`.
+> Construir con el método del audit-tracker (ficha → plan de sesiones → encargos), contra los criterios de aceptación.
