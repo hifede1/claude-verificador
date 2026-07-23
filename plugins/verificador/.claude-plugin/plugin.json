@@ -1,0 +1,11 @@
+{
+  "name": "verificador",
+  "description": "Convierte los criterios de aceptación de las fichas en tests trazables: clasifica con el humano (testeable / con esfuerzo / verificación manual), genera SIEMPRE esqueletos arrange-act-assert con nombre trazable test↔criterio (jamás un test completo inventado = jamás un verde falso), y registra lo no testeable como verificación manual explícita. Agnóstico de lenguaje con salvaguarda: lo que no domina degrada a esqueleto neutro, nunca a un test roto.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Federico Pernice"
+  },
+  "repository": "https://github.com/hifede1/claude-verificador",
+  "license": "MIT",
+  "keywords": ["testing", "criterios", "trazabilidad", "audit-tracker", "claude-code"]
+}
