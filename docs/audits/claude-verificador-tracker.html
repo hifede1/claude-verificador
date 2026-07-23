@@ -384,7 +384,7 @@
    DATOS — esto es lo único que se edita en una actualización normal.
    ========================================================================== */
 
-const LAST_AUDIT = '2026-07-23';
+const LAST_AUDIT = '2026-07-24';
 const CLOSED_COUNT = 0;              // Auditoría inicial — obra no iniciada, nada cerrado todavía.
 const REPO = 'hifede1/claude-verificador';
 
@@ -470,7 +470,6 @@ const DATA = [
 const DEBT = [
   {t:'Obra no iniciada: el producto es cero código', d:'El repo entero son 3 archivos de docs. Ningún criterio de la ficha tiene obra detrás; el plan completo (S01–S04, issues #1–#4) está por delante. Hasta S01 no hay siquiera algo instalable.', sev:'stop'},
   {t:'batuta lo lista como delegado que BLOQUEA', d:'La tabla de delegación de batuta (FICHA §3) le asigna «criterios → tests» y lo marca como bloqueante de la capacidad de testear del taller: la deuda de verificación de TODOS los proyectos se ve (pestaña Tests) pero no se paga. Verificado en el STACK de batuta: «Diseñado y sin construir: ficha firmada, 2 commits, cero código».', sev:'warn'},
-  {t:'Firma de la ficha en formato pre-011', d:'La cabecera dice «decisiones firmadas por Fede el 2026-07-17» — <b>mención de firma, no el acto con la línea exacta de 011</b> (<code>Estado: VIGENTE</code> + <code>Firmado: FECHA por &lt;quién&gt;</code>). Si batuta dirige esta obra, va a FRENAR en la precondición (comportamiento verificado con cartera, fix #38). Trabajo de la mesa de firmas con Fede.', sev:'warn'}
 ];
 
 const PLAN = [
@@ -535,6 +534,7 @@ const TESTS = {
 const REFS = [];
 
 const CHANGELOG = [
+  {f:'2026-07-24', t:'🖊️ Mesa de firmas: la FICHA es plano VIGENTE', d:'Re-auditoría tras el <b>PR #6</b> (mergeado por Fede 2026-07-23 23:05 UTC — el segundo acto). La cabecera de <code>docs/FICHA.md</code> lleva ahora la <b>línea EXACTA de 011</b> (<code>Estado: VIGENTE</code> + <code>Firmado: 2026-07-23 por Fede</code>) con Procedencia 018 (re-ratificación en bloque en la mesa de firmas, elección explícita en sesión). <b>La deuda «firma en formato pre-011» sale de DEBT</b> — batuta ya puede dirigir esta obra sin frenar en la precondición. Las 5 decisiones técnicas del §4 quedaron ratificadas.'},
   {f:'2026-07-23', t:'🏁 Auditoría inicial — repo publicado, obra cero, cola despachada', d:'Primera auditoría de <code>claude-verificador</code>, disparada por el worklist de <b>cartera</b> (ítem #2: «sin remoto GitHub, invisible para la flota»). <b>El repo se publicó HOY</b> (decisión del dueño en sesión; historia escaneada antes de salir — 2 commits, solo docs, limpia). Estado real: <b>plano completo y MUY bien pensado, obra CERO</b> — la ficha trae 5 decisiones técnicas (2 marcadas «firmadas» el 07-17, formato pre-011 → deuda de mesa de firmas) con una salvaguarda ejemplar (SIEMPRE esqueletos + degradación a neutro = jamás un verde falso); el código no existe. Hallazgo estructural: batuta lo lista como delegado que BLOQUEA la capacidad de testear del taller — la deuda de verificación de todos los proyectos se ve pero no se paga hasta que esto exista. Plan: <b>S01</b> esqueleto → <b>S02</b> clasificación → <b>S03</b> generación trazable → <b>S04</b> integración (issues #1–#4, cadena estricta). Calibración heredada del taller: sesiones S/M/L · Fede + esta máquina · directo · <b>modo orquestado</b>.'}
 ];
 

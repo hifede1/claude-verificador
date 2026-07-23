@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "proyecto": "claude-verificador",
-  "last_audit": "2026-07-23",
+  "last_audit": "2026-07-24",
   "closed_count": 0,
   "calibracion": {
     "unidad": "sesiones (~2-4h), talla S/M/L",
@@ -17,7 +17,11 @@
       "estado": "pend",
       "resumen": "El plugin no existe: el repo es ficha + README (3 archivos, verificado). Primero el vehículo.",
       "pendientes": [
-        {"id": "p-esqueleto", "txt": "Plugin instalable: validate sin warnings + install limpio EXIT 0", "sesion": "S01"}
+        {
+          "id": "p-esqueleto",
+          "txt": "Plugin instalable: validate sin warnings + install limpio EXIT 0",
+          "sesion": "S01"
+        }
       ]
     },
     {
@@ -27,7 +31,11 @@
       "estado": "pend",
       "resumen": "Parseo de criterios + clasificación decidida por el humano con recomendación. Nada queda sin clasificar. Sin obra.",
       "pendientes": [
-        {"id": "p-clasificacion", "txt": "Parseo + clasificación humana con la corrida del criterio 3", "sesion": "S02"}
+        {
+          "id": "p-clasificacion",
+          "txt": "Parseo + clasificación humana con la corrida del criterio 3",
+          "sesion": "S02"
+        }
       ]
     },
     {
@@ -37,7 +45,11 @@
       "estado": "pend",
       "resumen": "Esqueletos arrange/act/assert con nombre trazable S02_C1_...; salvaguarda: lenguaje no reconocido → esqueleto neutro + manual. Jamás verde falso. Sin obra.",
       "pendientes": [
-        {"id": "p-trazable", "txt": "Esqueletos trazables + registro de manuales (criterios 1 y 2)", "sesion": "S03"}
+        {
+          "id": "p-trazable",
+          "txt": "Esqueletos trazables + registro de manuales (criterios 1 y 2)",
+          "sesion": "S03"
+        }
       ]
     },
     {
@@ -47,15 +59,57 @@
       "estado": "pend",
       "resumen": "El mapa de evidencia del tracker refleja el contrato lleno sin adaptación manual. Desbloquea la fila «verificador» de la tabla de delegación de batuta. Sin obra.",
       "pendientes": [
-        {"id": "p-integracion", "txt": "Corrida end-to-end con /audit-tracker reflejando el contrato lleno", "sesion": "S04"}
+        {
+          "id": "p-integracion",
+          "txt": "Corrida end-to-end con /audit-tracker reflejando el contrato lleno",
+          "sesion": "S04"
+        }
       ]
     }
   ],
   "plan": [
-    {"sesion": "S01", "titulo": "Esqueleto: plugin instalable con comando placeholder", "estimacion": 1, "deps": [], "cierra": ["p-esqueleto"]},
-    {"sesion": "S02", "titulo": "Lectura y clasificación: parseo + decisión humana", "estimacion": 1, "deps": ["S01"], "cierra": ["p-clasificacion"]},
-    {"sesion": "S03", "titulo": "Generación trazable: esqueletos con nombres test↔criterio", "estimacion": 1, "deps": ["S02"], "cierra": ["p-trazable"]},
-    {"sesion": "S04", "titulo": "Integración con audit-tracker + publicación", "estimacion": 1, "deps": ["S03"], "cierra": ["p-integracion"]}
+    {
+      "sesion": "S01",
+      "titulo": "Esqueleto: plugin instalable con comando placeholder",
+      "estimacion": 1,
+      "deps": [],
+      "cierra": [
+        "p-esqueleto"
+      ]
+    },
+    {
+      "sesion": "S02",
+      "titulo": "Lectura y clasificación: parseo + decisión humana",
+      "estimacion": 1,
+      "deps": [
+        "S01"
+      ],
+      "cierra": [
+        "p-clasificacion"
+      ]
+    },
+    {
+      "sesion": "S03",
+      "titulo": "Generación trazable: esqueletos con nombres test↔criterio",
+      "estimacion": 1,
+      "deps": [
+        "S02"
+      ],
+      "cierra": [
+        "p-trazable"
+      ]
+    },
+    {
+      "sesion": "S04",
+      "titulo": "Integración con audit-tracker + publicación",
+      "estimacion": 1,
+      "deps": [
+        "S03"
+      ],
+      "cierra": [
+        "p-integracion"
+      ]
+    }
   ],
   "decisiones_pendientes": [],
   "referencias": [],
@@ -63,6 +117,6 @@
   "deuda": [
     "Obra no iniciada: cero código — el plan entero (S01–S04) por delante",
     "batuta lo lista como delegado que BLOQUEA la capacidad de testear del taller",
-    "Firma de la ficha en formato pre-011 (mención «firmadas 2026-07-17», sin la línea exacta) — mesa de firmas con Fede"
+    "FICHA VIGENTE desde la mesa de firmas 2026-07-23 (línea exacta de 011 + Procedencia 018) — batuta puede dirigir esta obra"
   ]
 }
