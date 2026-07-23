@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "proyecto": "claude-verificador",
   "last_audit": "2026-07-24",
-  "closed_count": 0,
+  "closed_count": 1,
   "calibracion": {
     "unidad": "sesiones (~2-4h), talla S/M/L",
     "actores": "Fede + una máquina (esta)",
@@ -14,15 +14,9 @@
       "id": "v01",
       "nombre": "Esqueleto instalable (S01)",
       "zona": "Cimiento — que exista de verdad",
-      "estado": "pend",
-      "resumen": "El plugin no existe: el repo es ficha + README (3 archivos, verificado). Primero el vehículo.",
-      "pendientes": [
-        {
-          "id": "p-esqueleto",
-          "txt": "Plugin instalable: validate sin warnings + install limpio EXIT 0",
-          "sesion": "S01"
-        }
-      ]
+      "estado": "hecho",
+      "resumen": "CERRADA S01 (PR #8 + alta #36): validate sin warnings, install limpio verde en perfil virgen, comando responde declarando su estado y la salvaguarda.",
+      "pendientes": []
     },
     {
       "id": "v02",
@@ -69,15 +63,6 @@
   ],
   "plan": [
     {
-      "sesion": "S01",
-      "titulo": "Esqueleto: plugin instalable con comando placeholder",
-      "estimacion": 1,
-      "deps": [],
-      "cierra": [
-        "p-esqueleto"
-      ]
-    },
-    {
       "sesion": "S02",
       "titulo": "Lectura y clasificación: parseo + decisión humana",
       "estimacion": 1,
@@ -115,7 +100,7 @@
   "referencias": [],
   "referencias_faltantes": [],
   "deuda": [
-    "Obra no iniciada: cero código — el plan entero (S01–S04) por delante",
+    "El motor no existe: clasificación y generación son S02–S04 — el esqueleto instalable (S01) lo declara honesto",
     "batuta lo lista como delegado que BLOQUEA la capacidad de testear del taller",
     "FICHA VIGENTE desde la mesa de firmas 2026-07-23 (línea exacta de 011 + Procedencia 018) — batuta puede dirigir esta obra"
   ]

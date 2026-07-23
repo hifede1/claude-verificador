@@ -385,30 +385,28 @@
    ========================================================================== */
 
 const LAST_AUDIT = '2026-07-24';
-const CLOSED_COUNT = 0;              // Auditoría inicial — obra no iniciada, nada cerrado todavía.
+const CLOSED_COUNT = 1;              // S01 cerrada y verificada 2026-07-24 (PR #8 + alta audit-tracker#36).
 const REPO = 'hifede1/claude-verificador';
 
 /* Estimación: talle S / M / L por pendiente (calibración heredada del taller). */
 const EST = {
-  'p-esqueleto':'M','p-clasificacion':'M','p-trazable':'L','p-integracion':'M'
+  'p-clasificacion':'M','p-trazable':'L','p-integracion':'M'
 };
 
 const DATA = [
   {
     zona: 'Cimiento — que exista de verdad',
     bloques: [{
-      id: 'v01', titulo: 'Esqueleto instalable (S01)', estado: 'pend',
+      id: 'v01', titulo: 'Esqueleto instalable (S01)', estado: 'hecho',
       sesion: 'S01', talle: 'M', issue: 1, trat: 'directo',
       planteamiento: 'El plugin NO existe: el repo es ficha + README. Sin <code>plugins/</code> ni manifiesto, <code>/criterios-a-tests</code> es una promesa. Primero el vehículo — la lección S01 de batuta y cartera.',
-      hallazgo: 'Verificado 2026-07-23: <code>git ls-tree -r HEAD</code> = 3 archivos (.gitignore, README, FICHA). Cero código.',
+      hallazgo: '<b>CERRADA S01 (2026-07-24, PR #8 + alta audit-tracker#36):</b> plugin v0.1.0 con frontmatter desde el día uno; <code>validate</code> sin warnings; <b>install limpio VERDE en perfil virgen</b> (EXIT 0, evidencia en issue #1); corrida headless real — el placeholder responde declarando el estado y la salvaguarda.',
       metodo: [
         'Manifiesto v0.1.0 + <code>commands/criterios-a-tests.md</code> placeholder CON frontmatter YAML (lección C1 de cartera).',
         'Alta en <code>fede-tools</code>: git-subdir con URL HTTPS COMPLETA, PR firmado en claude-audit-tracker.',
         'Install limpio REAL en perfil virgen → EXIT 0.'
       ],
-      pend: [
-        {id:'p-esqueleto', t:'Plugin instalable: validate sin warnings + install limpio EXIT 0', v:'perfil virgen → marketplace add → install → /verificador:criterios-a-tests responde'}
-      ],
+      pend: [],
       refs: [], prereq: []
     }]
   },
@@ -468,12 +466,11 @@ const DATA = [
 ];
 
 const DEBT = [
-  {t:'Obra no iniciada: el producto es cero código', d:'El repo entero son 3 archivos de docs. Ningún criterio de la ficha tiene obra detrás; el plan completo (S01–S04, issues #1–#4) está por delante. Hasta S01 no hay siquiera algo instalable.', sev:'stop'},
+  {t:'El motor no existe: clasificación y generación pendientes', d:'El esqueleto es instalable (S01 ✓) pero el producto real —parseo, clasificación humana, esqueletos trazables, integración— es S02–S04 (issues #2–#4). El placeholder lo declara honesto en cada corrida.', sev:'stop'},
   {t:'batuta lo lista como delegado que BLOQUEA', d:'La tabla de delegación de batuta (FICHA §3) le asigna «criterios → tests» y lo marca como bloqueante de la capacidad de testear del taller: la deuda de verificación de TODOS los proyectos se ve (pestaña Tests) pero no se paga. Verificado en el STACK de batuta: «Diseñado y sin construir: ficha firmada, 2 commits, cero código».', sev:'warn'},
 ];
 
 const PLAN = [
-  {s:'S01', o:'Esqueleto: plugin instalable con comando placeholder', b:'v01', issue:1, talle:'M', trat:'directo', pre:'— (arranca ya)'},
   {s:'S02', o:'Lectura y clasificación: parseo + decisión humana', b:'v02', issue:2, talle:'M', trat:'directo', pre:'S01 (#1)'},
   {s:'S03', o:'Generación trazable: esqueletos con nombres test↔criterio', b:'v03', issue:3, talle:'L', trat:'directo', pre:'S02 (#2)'},
   {s:'S04', o:'Integración con audit-tracker + publicación', b:'v04', issue:4, talle:'M', trat:'directo', pre:'S03 (#3)'}
@@ -518,13 +515,13 @@ const DECISIONS_EXTRA = [];
 
 const TESTS = {
   gates: [
-    {n:'claude plugin validate', cmd:'claude plugin validate plugins/verificador', est:'rojo', nota:'<b>No hay plugin que validar.</b> El directorio plugins/ no existe — se crea en S01.'},
-    {n:'Install limpio', cmd:'CLAUDE_CONFIG_DIR=<perfil-virgen> claude plugin install verificador@fede-tools', est:'rojo', nota:'Sin entrada en el marketplace ni plugin que instalar. Criterio de S01.'},
+    {n:'claude plugin validate', cmd:'claude plugin validate plugins/verificador', est:'verde', nota:'<b>VERDE desde S01 (2026-07-24):</b> Validation passed, cero warnings.'},
+    {n:'Install limpio', cmd:'CLAUDE_CONFIG_DIR=<perfil-virgen> claude plugin install verificador@fede-tools', est:'verde', nota:'<b>VERDE desde S01 (2026-07-24):</b> alta mergeada (audit-tracker#36) + install en perfil virgen EXIT 0, scope user.'},
     {n:'Corridas sembradas', cmd:'fixtures por criterio + corridas de /criterios-a-tests', est:'rojo', nota:'<b>El único gate real del producto y no existe ninguna.</b> Los 4 criterios de FICHA §6 sin evidencia — se siembran con cada sesión (patrón S09/C3).'}
   ],
   flows: FLOWS.map(f => ({id:f.id, t:f.t, pill:'rojo', test:'Sin corrida que lo clave. Se clava en su sesión del plan con fixture sembrado.'})),
   contrato: [
-    {b:'v01', bt:'Esqueleto instalable', total:1, clavados:0, nota:'Criterio de plan (§7-S01): validate sin warnings + install limpio EXIT 0.'},
+    {b:'v01', bt:'Esqueleto instalable', total:1, clavados:1, nota:'VERDE desde S01: validate sin warnings + install limpio EXIT 0 en perfil virgen + comando responde (headless real).'},
     {b:'v02', bt:'Lectura y clasificación', total:1, clavados:0, nota:'Criterio 3 de FICHA §6: ningún criterio sin clasificar tras una corrida (en el limbo = falla).'},
     {b:'v03', bt:'Generación trazable', total:2, clavados:0, nota:'Criterios 1 (ficha de 3 criterios → esqueletos + registro) y 2 (trazabilidad bidireccional sin ambigüedad).'},
     {b:'v04', bt:'Integración audit-tracker', total:1, clavados:0, nota:'Criterio 4: el mapa de evidencia refleja el contrato lleno sin adaptación manual.'}
@@ -534,6 +531,7 @@ const TESTS = {
 const REFS = [];
 
 const CHANGELOG = [
+  {f:'2026-07-24', t:'✅ S01 cerrada: el esqueleto existe, instala y dice la verdad', d:'Re-auditoría tras el <b>PR #8</b> y el alta <b>audit-tracker#36</b>, ambos mergeados por Fede. <code>plugins/verificador</code> v0.1.0: validate SIN warnings, <b>install limpio VERDE en perfil virgen</b> (EXIT 0), corrida headless real donde <code>/verificador:criterios-a-tests</code> responde declarando el estado de esqueleto y la salvaguarda anti-verde-falso. Marketplace en 6. p-esqueleto → verde (CLOSED_COUNT 0→1). Próxima: <b>S02 (lectura y clasificación)</b>.'},
   {f:'2026-07-24', t:'🖊️ Mesa de firmas: la FICHA es plano VIGENTE', d:'Re-auditoría tras el <b>PR #6</b> (mergeado por Fede 2026-07-23 23:05 UTC — el segundo acto). La cabecera de <code>docs/FICHA.md</code> lleva ahora la <b>línea EXACTA de 011</b> (<code>Estado: VIGENTE</code> + <code>Firmado: 2026-07-23 por Fede</code>) con Procedencia 018 (re-ratificación en bloque en la mesa de firmas, elección explícita en sesión). <b>La deuda «firma en formato pre-011» sale de DEBT</b> — batuta ya puede dirigir esta obra sin frenar en la precondición. Las 5 decisiones técnicas del §4 quedaron ratificadas.'},
   {f:'2026-07-23', t:'🏁 Auditoría inicial — repo publicado, obra cero, cola despachada', d:'Primera auditoría de <code>claude-verificador</code>, disparada por el worklist de <b>cartera</b> (ítem #2: «sin remoto GitHub, invisible para la flota»). <b>El repo se publicó HOY</b> (decisión del dueño en sesión; historia escaneada antes de salir — 2 commits, solo docs, limpia). Estado real: <b>plano completo y MUY bien pensado, obra CERO</b> — la ficha trae 5 decisiones técnicas (2 marcadas «firmadas» el 07-17, formato pre-011 → deuda de mesa de firmas) con una salvaguarda ejemplar (SIEMPRE esqueletos + degradación a neutro = jamás un verde falso); el código no existe. Hallazgo estructural: batuta lo lista como delegado que BLOQUEA la capacidad de testear del taller — la deuda de verificación de todos los proyectos se ve pero no se paga hasta que esto exista. Plan: <b>S01</b> esqueleto → <b>S02</b> clasificación → <b>S03</b> generación trazable → <b>S04</b> integración (issues #1–#4, cadena estricta). Calibración heredada del taller: sesiones S/M/L · Fede + esta máquina · directo · <b>modo orquestado</b>.'}
 ];
