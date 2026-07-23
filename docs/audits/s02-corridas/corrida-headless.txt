@@ -1,0 +1,22 @@
+[33mWarning: no stdin data received in 3s, proceeding without it. If piping from a slow command, redirect stdin explicitly: < /dev/null to skip, or wait longer.[39m
+Leí la ficha. Bien, escuchame lo que encontré y cómo termina esta corrida.
+
+## Fase 1 — Lectura
+
+Ficha: `docs/FICHA.md` (**conversor-csv**, estado VIGENTE, firmada 2026-07-24 por Fede). No hay `PLAN.md` separado, pero la ficha trae el plan en §7 (S01 Parser, S02 Streaming, S03 UX de errores), así que mapeo cada criterio a la sesión que lo cubre. Extraje los TRES criterios de §6 — no hay más checkboxes en el documento.
+
+**Hallazgo de redacción para el dueño** (se reporta, no se clasifica por la fuerza): el criterio 3 («mensaje comprensible para un usuario no técnico») no es verificable de forma objetiva tal como está redactado — "comprensible" no tiene vara medible. SE PUEDE verificar, pero solo por juicio humano; si el dueño quisiera algo automatizable, debería reescribirlo con condiciones concretas (p. ej. "no expone stack traces, nombra el campo y la fila del error, sugiere la corrección").
+
+## Fase 2 — Recomendaciones de clasificación
+
+| Id | Criterio | Clase recomendada | Por qué / qué lo clavaría |
+|---|---|---|---|
+| `S01_C1` | CSV con comillas escapadas y saltos de línea embebidos se parsea sin perder campos (fixture con los 4 casos borde) | **Testeable automático** | Es una función pura de parseo con fixture chico. Lo clava un test unitario tabla-driven: 4 casos borde (comillas escapadas, newline embebido, ambos combinados, campo vacío citado) → se compara el JSON resultante campo por campo. Cero infraestructura. |
+| `S02_C2` | Con archivo de 2GB el proceso no supera 512MB de RAM (streaming) | **Testeable con esfuerzo** | Es clavable pero exige entorno real: generar un fixture de 2GB (o sintetizarlo al vuelo), correr el CLI como proceso vivo y muestrear su RSS (`/proc` o `ps`) durante toda la corrida. No es un unit test; es un test de integración pesado, probablemente fuera del CI rápido. |
+| `S03_C3` | Mensaje de error ante esquema inválido comprensible para usuario no técnico | **Verificación manual** | "Comprensible" es juicio humano puro. Se verifica a mano: al cerrar S03, el dueño (o un usuario no técnico real) provoca los errores de esquema y valida que los mensajes se entienden. Un test automático solo podría clavar propiedades proxy (no hay stack trace, código de salida correcto) — eso sería OTRO criterio, no este. |
+
+## Corrida incompleta — lo declaro
+
+Esta corrida es no interactiva: no tengo mecanismo para que respondas pregunta por pregunta, y **la clasificación requiere la decisión humana — corrida incompleta, nada quedó clasificado**. No escribí ningún archivo, no clasifiqué por default y no marqué nada como decidido: la tabla de arriba son RECOMENDACIONES, no decisiones. Recomendación ≠ decisión; sin humano no hay clasificación — jamás un verde falso.
+
+Cuando puedas decidir vos las tres clases (podés simplemente contestarme "C1 automático, C2 con esfuerzo, C3 manual" o corregir la que quieras), cierro Fase 3: tabla final con tus decisiones y, solo con tu confirmación explícita, la persisto en `docs/verificacion/criterios-clasificados.md` como contrato para S03.
